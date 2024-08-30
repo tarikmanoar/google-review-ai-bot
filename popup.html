@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Authentication</title>
+        <script src="popup.js" type="module"></script>
+        <link rel="stylesheet" type="text/css" href="popup.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="logo">
+                <img src="/images/icon48.png" />
+                <h1>AMAR REVIEWS</h1>
+                <p>AI POWERED REVIEWS</p>
+            </div>
+            <div id="loginDiv">
+                <h3 class="welcome-text">Welcome back!</h3>
+                <form id="loginForm">
+                    <input type="email" id="loginName" placeholder="Email" required />
+                    <input type="password" id="loginPassword" placeholder="Password" required />
+                    <button type="submit">Login</button>
+                </form>
+                <div id="response"></div>
+                <br>
+                <div class="lpage-links">
+                    <p><a href="https://api.amar.reviews/register" id="createAccBtn" target="_blank">Create Account</a>
+                    </p>
+                    <p><a href="https://api.amar.reviews/forgot-password" target="_blank">Forgot Password</a></p>
+                </div>
+            </div>
+            <div id="regDiv" class="hidden-section">
+                <h3 class="welcome-text">Create your account to get started!</h3>
+                <form id="regForm" autocomplete="off">
+                    <input type="text" id="username" placeholder="Your Name" required />
+                    <input type="email" id="useremail" placeholder="Email" required />
+                    <input type="password" id="password" placeholder="Password" required />
+                    <input type="password" id="password_confirmation" placeholder="Password Confirmation" required />
+                    <button type="submit">Register</button>
+                </form>
+                <div id="regResponse"></div>
+                <br>
+                <div class="lpage-links">
+                    <p>Already have account? <a href="https://api.amar.reviews/login" id="loginBtn"
+                            target="_blank">Login</a></p>
+                </div>
+            </div>
+
+            <div id="instructionsDiv">
+                <h2>Welcome <span class="rrName"></span>!</h2>
+                <ol>
+                    <li>Sign into your Google listing</li>
+                    <li>Click on reviews.</li>
+                    <li>Click reply to reviews.</li>
+                    <li>Click blue icon bottom right.</li>
+                    <li>Send reply.</li>
+                </ol>
+                <img style="max-width: 100%;" src="/images/reply-demo.gif" />
+            </div>
+        </div>
+        <p class="rLogoutBtnCon"><button id="rLogoutBtn">Logout</button></p>
+        <br>
+        <p class="lpage-links">Need help? Contact <a href="mailto:support@api.amar.reviews">Support</a></p>
+    </body>
+
+</html>

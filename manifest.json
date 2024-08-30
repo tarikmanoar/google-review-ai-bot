@@ -1,0 +1,69 @@
+{
+   "action": {
+      "default_popup": "popup.html"
+   },
+   "background": {
+      "service_worker": "sw.js"
+   },
+   "content_scripts": [
+      {
+         "all_frames": true,
+         "css": [
+            "styles.css"
+         ],
+         "js": [
+            "content-script.js"
+         ],
+         "match_about_blank": true,
+         "matches": [
+            "https://*.google.com/*"
+         ]
+      }
+   ],
+   "name": "Amar Reviews",
+   "description": "AI-powered reviews to Google maps chrome extension. Free & Premium services available.",
+   "host_permissions": [
+      "https://*.google.com/*",
+      "https://*.amar.reviews/*"
+   ],
+   "icons": {
+      "128": "images/128x128.png",
+      "16": "images/icon16.png",
+      "32": "images/32x32.png",
+      "48": "images/icon48.png"
+   },
+   "manifest_version": 3,
+   "oauth2": {
+      "client_id": "923043351236-gkne7r1njk2s8vqqn2e2kpv09337n9k6.apps.googleusercontent.com",
+      "scopes": [
+         "openid",
+         "profile",
+         "email"
+      ]
+   },
+   "options_page": "options.html",
+   "options_ui": {
+      "open_in_tab": true,
+      "page": "options.html"
+   },
+   "permissions": [
+      "storage",
+      "identity",
+      "identity.email",
+      "notifications"
+   ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.0",
+   "web_accessible_resources": [
+      {
+         "matches": [
+            "https://*.google.com/*"
+         ],
+         "resources": [
+            "images/*",
+            "login.html"
+         ],
+         "use_dynamic_url": true
+      }
+   ]
+}

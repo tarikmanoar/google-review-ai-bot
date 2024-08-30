@@ -1,0 +1,400 @@
+.rrContainer input[type="text"],
+.rrContainer input[type="email"],
+.rrContainer input[type="password"],
+.rrContainer button,
+.rrButton,
+.rrUpgradeButton {
+  display: block;
+  width: auto;
+  padding: 10px;
+  margin: 10px auto;
+  background: transparent;
+  color: black;
+}
+
+.rLogoutBtnCon {
+  text-align: center;
+}
+
+#rLogoutBtn {
+  background-color: #350787;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 4px 15px;
+  border-radius: 20px;
+}
+
+.rrContainer button,
+.rrButton,
+.rrUpgradeButton,
+#rrInfoMsg a {
+  background-color: #350787;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  border-radius: 20px;
+}
+
+#data-container {
+  margin-top: 20px;
+}
+
+#error-message {
+  color: red;
+  text-align: center;
+}
+
+.rrLogoCon {
+  text-align: center;
+}
+
+.rrLogoCon h1 {
+  font-weight: 700;
+  margin: 0;
+  font-size: 18px;
+
+}
+
+.rrLogoCon p {
+  margin: 0;
+  font-size: 10px;
+}
+
+.rrwelcome-text {
+  text-align: center;
+}
+
+.rrlpage-links p {
+  text-align: center;
+  color: black;
+}
+
+.rrlpage-links p a {
+  color: #350787;
+  font-weight: 600;
+  text-decoration: underline;
+
+}
+
+.rrhidden-section {
+  display: none;
+}
+
+.extension-button {
+  display: flex;
+  align-items: center;
+  background-color: #ccc;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.outer-div {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.inner-div {
+  margin-left: 5px;
+}
+
+.inner-div a {
+  text-decoration: none;
+}
+
+.inner-div img {
+  width: 32px;
+  height: 32px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+#loadingPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #350787;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+#loginResponse {
+  color: red;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rr-sign img {
+  width: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.rr-sign {
+  border: 1px #350787 solid;
+  position: relative;
+
+  line-height: 24px;
+  height: 24px;
+  display: inline-flex;
+  margin-left: 5px;
+}
+
+.rr-sign:hover {
+  text-decoration: none;
+}
+
+.rr-sign span {
+  background-color: #350787;
+  color: #fff;
+  padding: 0 5px;
+}
+
+#regResponse .error {
+  color: red;
+}
+
+/* Style the modal dialog */
+.modal-container {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999999;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Style the content of the modal */
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rrclose {
+  position: relative;
+  display: block;
+}
+
+.rrLogoCon h1 {
+  color: black;
+}
+
+.rrLogoCon p {
+  color: black;
+}
+
+.rrwelcome-text {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+#rrInstructionsDiv {
+  width: 200px;
+  margin: auto;
+}
+
+#rrInstructionsDiv h2 {
+  color: black;
+  text-align: center;
+  font-size: 16px;
+}
+
+#rrInstructionsDiv ol li {
+  color: black;
+  list-style: auto;
+}
+
+#rLogoutBtnCon {
+  text-align: center;
+}
+
+.lpage-links {
+  color: black;
+  text-align: center;
+}
+
+.lpage-links a {
+  color: #350787;
+  text-decoration: underline;
+}
+
+#rrCloseBtn {
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  background: black;
+  border: 0px;
+  line-height: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+#rrResponse,
+#rrRegResponse {
+  color: red;
+}
+
+.rrtname {
+  color: black;
+  font-size: 14px;
+  min-width: 95px;
+  display: inline-block;
+}
+
+#rrInstructionsDiv p {
+  margin: 0;
+}
+
+.rrPlanText,
+.rrReplyBlanace {
+  color: black;
+  font-size: 14px;
+}
+
+.rrUpgradeBox {
+  border: 1px solid;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.rrUpgradeBox ul {
+  list-style: disc;
+  color: black;
+  padding-left: 15px;
+  margin: 0;
+}
+
+.rrButton,
+.rrUpgradeButton,
+#rrInfoMsg a {
+  display: inline-block;
+  text-align: center;
+  max-width: 100px;
+  color: white;
+  background: green;
+}
+
+#rrInfoMsg a,
+.rrButton:visited,
+.rrButton:focus,
+.rrUpgradeButton:visited,
+.rrUpgradeButton:focus {
+  display: inline-block;
+  text-align: center;
+  max-width: 100px;
+  color: white;
+  background: green;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.rr-styles-dropdown {
+  padding: 6px;
+  margin-bottom: 6px;
+
+}
+
+.rr-info .rrPlanText {
+  color: inherit;
+  font-size: 14px;
+}
+
+.rr-info .rrReplyBlanace {
+  color: inherit;
+  font-size: 14px;
+}
+
+#rrInfoMsg a,
+.rr-info .rrButton,
+.rr-info .rrUpgradeButton {
+  padding: 2px 7px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.rr-info {
+  text-align: center;
+}
+
+.rr-info .rrPpgradePromt {
+  margin: 0;
+}
+
+.rrUpgradeBox .rrProPtext {
+  text-align: center;
+  margin: 0;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#rr-language-dropdown {
+  margin-left: 5px;
+}

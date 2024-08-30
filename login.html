@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Login/Register</title>
+        <!-- Add any necessary CSS or styles here -->
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+
+    <body>
+        <div class="modal">
+            <div class="modal-content">
+                <button id="rrCloseBtn" class="rrCloseBtn"><svg fill="#ffffff" height="15px" width="15px" version="1.1"
+                        id="Capa_1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"
+                        viewBox="0 0 460.775 460.775" xml:space="preserve">
+                        <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+       c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+       c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+       c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+       l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+       c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z" />
+                    </svg></button>
+                <div class="rrContainer">
+                    <div class="rrLogoCon">
+
+                        <h1>AMAR REVIEWS</h1>
+                        <p>AI POWERED REVIEWS</p>
+                    </div>
+                    <div id="rrLoginDiv">
+                        <h3 class="rrwelcome-text">Welcome back!</h3>
+                        <form id="rrLoginForm">
+                            <input type="email" name="loginName" id="loginName" placeholder="Email" required />
+                            <input type="password" name="loginPassword" id="loginPassword" placeholder="Password"
+                                required />
+                            <button type="submit">Login</button>
+                        </form>
+                        <div id="rrResponse"></div>
+                        <br>
+                        <div class="rrlpage-links">
+                            <p><a href="https://api.amar.reviews/register" id="rrCreateAccBtn" target="_blank">Create
+                                    Account</a></p>
+                            <p><a href="https://api.amar.reviews/forgot-password" target="_blank">Forgot Password</a></p>
+
+
+                        </div>
+
+                    </div>
+                    <div id="rrRegDiv" class="rrhidden-section">
+                        <h3 class="rrwelcome-text">Create your account to get started!</h3>
+                        <form id="rrRegForm">
+                            <input type="text" name="rrUserName" id="rrUserName" placeholder="Your Name" required />
+                            <input type="email" name="rrUserEmail" id="rrUserEmail" placeholder="Email" required />
+                            <input type="password" name="rrPassword" id="rrPassword" placeholder="Password" required />
+                            <input type="password" name="rrpassword_confirmation" id="rrpassword_confirmation" placeholder="Password Confirmation" required />
+                            <button type="submit">Register</button>
+                        </form>
+                        <div id="rrRegResponse"></div>
+                        <br>
+                        <div class="rrlpage-links">
+                            <p>Already have account? <a href="https://api.amar.reviews/login" id="rrLoginBtn"
+                                    target="_blank">Login</a></p>
+                        </div>
+                    </div>
+
+                    <div id="rrInstructionsDiv" class="rrhidden-section">
+                        <h2>Welcome <span id="rrPopName" class="rrName"></span>!</h2>
+                        <p><span class="rrtname">Current Plan </span>: <span class="rrPlanText">Starter</span></p>
+                        <p><span class="rrtname">Reply Balance </span>: <span class="rrReplyBlanace">5</span></p>
+                        <div class="rrUpgradeBox ">
+                            <h3 class="rrProPtext">Pro Plan</h3>
+                            <p class="text-center upgrade-link-con"><a id="rrUpgradeButton" class="rrUpgradeButton"
+                                    target="_blank" href="https://api.amar.reviews/login/">Upgrade Now</a></p>
+                            <ul>
+                                <li>50 Replies month</li>
+                                <li>7 Reply styles</li>
+                                <li>Languages Support</li>
+                                <li>Monthly analysis</li>
+                                <li>Regenerate reply</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p class="rLogoutBtnCon rrhidden-section" id="rLogoutButtonCon"><button id="rLogoutBtn">Logout</button>
+                </p>
+                <br>
+                <p class="lpage-links">Need help? Contact <a href="mailto:support@api.amar.reviews">Support</a></p>
+            </div>
+        </div>
+
+        <script src="login.js"></script>
+    </body>
+
+</html>
