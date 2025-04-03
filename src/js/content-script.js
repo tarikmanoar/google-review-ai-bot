@@ -127,12 +127,12 @@ async function register(credentials) {
 // content.js
 
 // Function to inject a button
-function injectButton(targetNode) {
+function injectButton(target) {
     // const button = document.createElement("button");
     // button.innerText = "Click Me";
     // button.addEventListener("click", () => alert("Button Clicked!"));
-    // targetNode.appendChild(button);
-    console.log("button added");
+    // target.appendChild(button);
+    console.log(target);
 }
 
 // Observe DOM changes
@@ -186,7 +186,7 @@ async function runContentScript() {
         rrReplyLink.setAttribute("data-rAction", "rrpop");
         // Create the image element
         const image = document.createElement("img");
-        image.src = chrome.runtime.getURL("images/icon32.png"); // Replace with the path to your image
+        image.src = chrome.runtime.getURL("src/images/icon32.png"); // Replace with the path to your image
         image.alt = "reply reviews AI"; // Replace with appropriate alt text
 
         // Append the image to the <a> tag
@@ -231,57 +231,76 @@ async function runContentScript() {
         }
 
         const place = document.querySelector("h2.Ku5dzd").textContent;
-        const rating = document.querySelector(".lv4IMd.UuEGge").getAttribute("data-rating");
-        console.log(rating);
         const category = localStorage.getItem("category") ?? 'Restaurant';
+
+        const overall = document.querySelector(".lv4IMd.UuEGge").getAttribute("data-rating")?? 4;
+        const otherRating = document.querySelector(".RAKQ3e.j8hY5c.yJ767d");
+
+        // Extract all ratings from the DOM
+        let ratingsData = {
+            "overall": parseInt(overall)
+        };
+        if (otherRating) {
+            const ratingDivs = otherRating.querySelectorAll('.OGEEFe');
+            ratingDivs.forEach(div => {
+                const category = div.querySelector('h3.z61Im')?.textContent;
+                const ratingElem = div.querySelector('.lv4IMd.UuEGge');
+                const ratingValue = ratingElem ? ratingElem.getAttribute('data-rating') : null;
+                
+                if (category && ratingValue) {
+                    ratingsData[category] = parseInt(ratingValue);
+                }
+            });
+        }
+        
+        console.log("Extracted ratings:", ratingsData);
 
         (async function () {
             try {
                 if (token) {
-                var formdata = new FormData();
-                formdata.append("place", place);
-                formdata.append("rating", rating ?? 5);
-                formdata.append("category", category);
-                formdata.append("type", 'review');
-                var loadingPopup = document.getElementById("loadingPopup");
-                loadingPopup.style.display = "flex";
-                // Make a request to the API using the token
-                const response = await fetch(base_url+"/api/gemini", {
-                    headers: {
-                        Authorization: "Bearer " + token,
-                        accept: "application/json",
-                        'X-Gen-Token': 'fahrik-ai'
-                    },
-                    method: "POST",
-                    body: formdata
-                });
-                const data = await response.json();
-                console.log(data);
-                const gReviewTextArea = document.querySelector("textarea.VfPpkd-fmcmS-wGMbrd");
-                console.log(gReviewTextArea);
-                gReviewTextArea.focus();
-                gReviewTextArea.cols = 5;
-                //gReplyBtn.removeAttribute('disabled')
-                gReviewTextArea.style.height = "100px";
+                    var formdata = new FormData();
+                    formdata.append("place", place);
+                    formdata.append("rating", JSON.stringify(ratingsData));
+                    formdata.append("category", category);
+                    formdata.append("type", 'review');
+                    var loadingPopup = document.getElementById("loadingPopup");
+                    loadingPopup.style.display = "flex";
+                    // Make a request to the API using the token
+                    const response = await fetch(base_url+"/api/gemini", {
+                        headers: {
+                            Authorization: "Bearer " + token,
+                            accept: "application/json",
+                            'X-Gen-Token': 'fahrik-ai'
+                        },
+                        method: "POST",
+                        body: formdata
+                    });
+                    const data = await response.json();
+                    console.log(data);
+                    const gReviewTextArea = document.querySelector("textarea.VfPpkd-fmcmS-wGMbrd");
+                    gReviewTextArea.focus();
+                    gReviewTextArea.cols = 5;
+                    //gReplyBtn.removeAttribute('disabled')
+                    gReviewTextArea.style.height = "100px";
 
-                if (data.status == 200) {
-                    gReviewTextArea.value = data.review;
-                    chrome.storage.local.set({ rrRepliesLeft: data.review },
-                        function () {
-                            console.log("Value is set to " + data.review);
-                        });
+                    if (data.status == 200) {
+                        gReviewTextArea.value = data.review;
+                        chrome.storage.local.set({ rrRepliesLeft: data.review },
+                            function () {
+                                console.log("Value is set to " + data.review);
+                            });
+                    } else {
+                        gReviewTextArea.value = data.message;
+                    }
+                    // Close the popup
+                    loadingPopup.style.display = "none";
+                    // Perform further actions with the response data
                 } else {
-                    gReviewTextArea.value = data.message;
+                    // Token not found in storage
+                    const destElement = document.querySelector(".VfPpkd-fmcmS-wGMbrd.ZUPIVd");
+                    openPopup(e);
+                    destElement.textContent = "Authentication failed. Please login to the Extension first!";
                 }
-                // Close the popup
-                loadingPopup.style.display = "none";
-                // Perform further actions with the response data
-            } else {
-                // Token not found in storage
-                const destElement = document.querySelector(".VfPpkd-fmcmS-wGMbrd.ZUPIVd");
-                openPopup(e);
-                destElement.textContent = "Authentication failed. Please login to the Extension first!";
-            }
             } catch (error) {
                 console.error("API Request Error:", error);
             }
@@ -341,7 +360,7 @@ async function runContentScript() {
                     rrRegDiv.classList.add("rrhidden-section");
                     let rrLogoCon = modalContainer.querySelector(".rrLogoCon");
                     const logoImage = document.createElement("img");
-                    logoImage.src = chrome.runtime.getURL("images/icon32.png");
+                    logoImage.src = chrome.runtime.getURL("src/images/icon32.png");
 
                     rrLogoCon.insertBefore(logoImage, rrLogoCon.firstChild);
 
