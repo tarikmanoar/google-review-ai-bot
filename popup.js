@@ -1,3 +1,5 @@
+const manifest = chrome.runtime.getManifest();
+const base_url = manifest.web_accessible_resources[0].base_url;
 // Run the script after the popup is loaded
 document.addEventListener('DOMContentLoaded', function () {
     function getLocalStorageValues() {// Function to get values from localStorage and return a Promise
@@ -67,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function logout() {
         var { token, userName, userEmail, reviewLeft } = await getLocalStorageValues();
-        fetch('https://api.amar.reviews/api/logout', {
+        fetch(base_url+'/api/logout', {
             headers: {
                 'Authorization': 'Bearer ' + token,
                 'accept': 'application/json'
@@ -115,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     accept: 'application/json'
                 },
             };
-            const response = await fetch('https://api.amar.reviews/api/login', requestOptions);
+            const response = await fetch(base_url+'/api/login', requestOptions);
 
             if (response.ok) {
                 const data = await response.json();
@@ -159,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     accept: 'application/json'
                 },
             };
-            const response = await fetch('https://api.amar.reviews/api/register', requestOptions);
+            const response = await fetch(base_url+'/api/register', requestOptions);
 
             if (response.ok) {
                 const data = await response.json();

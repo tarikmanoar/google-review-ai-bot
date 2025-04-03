@@ -1,3 +1,6 @@
+const manifest = chrome.runtime.getManifest();
+const base_url = manifest.web_accessible_resources[0].base_url;
+
 async function openOptionsPage(e) {
     e.preventDefault();
     chrome.runtime.sendMessage({ action: "openOptionsPage" });
@@ -36,7 +39,7 @@ async function login(credentials) {
                 accept: "application/json",
             },
         };
-        const response = await fetch("https://api.amar.reviews/api/login",requestOptions);
+        const response = await fetch(base_url+"/api/login",requestOptions);
 
         if (response.status == 200) {
             const data = await response.json();
@@ -83,7 +86,7 @@ async function register(credentials) {
                 accept: "application/json",
             },
         };
-        const response = await fetch("https://api.amar.reviews/api/register",requestOptions);
+        const response = await fetch(base_url+"/api/register",requestOptions);
 
         if (response.status == 200) {
             const data = await response.json();
@@ -243,7 +246,7 @@ async function runContentScript() {
                 var loadingPopup = document.getElementById("loadingPopup");
                 loadingPopup.style.display = "flex";
                 // Make a request to the API using the token
-                const response = await fetch("https://api.amar.reviews/api/gemini", {
+                const response = await fetch(base_url+"/api/gemini", {
                     headers: {
                         Authorization: "Bearer " + token,
                         accept: "application/json",
@@ -355,10 +358,10 @@ async function runContentScript() {
 
                     let upgradeBtn = rrInstructionsDiv.querySelector(".rrUpgradeButton");
                     if (upgradeBtn) {
-                        upgradeBtn.href = "https://api.amar.reviews/upgrade/" + rrTh;
+                        upgradeBtn.href = base_url+"/upgrade/" + rrTh;
                     }
                     // check and update
-                    fetch("https://api.amar.reviews/api/check", {
+                    fetch(base_url+"/api/check", {
                         headers: {
                             Authorization: "Bearer " + token,
                             accept: "application/json",
@@ -446,7 +449,7 @@ async function runContentScript() {
                 async function logout() {
                     var { token, userName, userEmail, reviewLeft } = await getLocalStorageValues();
 
-                    fetch("https://api.amar.reviews/api/logout", {
+                    fetch(base_url+"/api/logout", {
                         headers: {
                             Authorization: "Bearer " + token,
                             accept: "application/json",

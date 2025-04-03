@@ -1,3 +1,6 @@
+const manifest = chrome.runtime.getManifest();
+const base_url = manifest.web_accessible_resources[0].base_url;
+
 function getLocalStorageValues() {// Function to get values from localStorage and return a Promise
     return new Promise((resolve) => {
         chrome.storage.local.get(['_token', '_username', '_email', '_review_left'], function (result) {
@@ -20,7 +23,7 @@ function setUserData(data) {// Store the access token in Chrome storage
 
 async function logout() {
     var { token, userName, userEmail, reviewLeft } = await getLocalStorageValues();
-    fetch('https://api.amar.reviews/api/logout', {
+    fetch(base_url+'/api/logout', {
         headers: {
             'Authorization': 'Bearer ' + token,
             'accept': 'application/json'
@@ -72,10 +75,6 @@ async function runContentScript() {
 }
 
 document.getElementById("google-login").addEventListener("click", () => {
-    const manifest = chrome.runtime.getManifest();
-
-    console.log(manifest.base_url);
-
     const clientId = manifest.oauth2.client_id;
     const scopes = manifest.oauth2.scopes.join(' ');
     const redirectUri = `https://${chrome.runtime.id}.chromiumapp.org`;
@@ -118,7 +117,7 @@ document.getElementById("google-login").addEventListener("click", () => {
 
 
 async function sendProfileToServer(profileData) {
-    const response = fetch('https://api.amar.reviews/api/google-login', {
+    const response = fetch(base_url+'/api/google-login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
