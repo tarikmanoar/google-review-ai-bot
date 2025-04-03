@@ -253,8 +253,6 @@ async function runContentScript() {
             });
         }
         
-        console.log("Extracted ratings:", ratingsData);
-
         (async function () {
             try {
                 if (token) {
@@ -276,22 +274,55 @@ async function runContentScript() {
                         body: formdata
                     });
                     const data = await response.json();
-                    console.log(data);
-                    const gReviewTextArea = document.querySelector("textarea.VfPpkd-fmcmS-wGMbrd");
-                    gReviewTextArea.focus();
-                    gReviewTextArea.cols = 5;
-                    //gReplyBtn.removeAttribute('disabled')
-                    gReviewTextArea.style.height = "100px";
 
                     if (data.status == 200) {
-                        gReviewTextArea.value = data.review;
-                        chrome.storage.local.set({ rrRepliesLeft: data.review },
-                            function () {
+                        // Create a paragraph element to display the review
+                        const reviewParagraph = document.createElement("p");
+                        reviewParagraph.textContent = data.review;
+                        reviewParagraph.classList.add("ai-generated-review");
+                        reviewParagraph.style.padding = "10px";
+                        reviewParagraph.style.margin = "10px 0";
+                        reviewParagraph.style.backgroundColor = "#242832";
+                        reviewParagraph.style.border = "1px solid #ccc";
+                        reviewParagraph.style.borderRadius = "5px";
+                        reviewParagraph.style.cursor = "pointer";
+                        reviewParagraph.title = "Click to copy to clipboard";
+                        
+                        // Find the target container to append the paragraph
+                        const targetContainer = document.querySelector(".RAKQ3e.robzGe");
+                        if (targetContainer) {
+                            targetContainer.appendChild(reviewParagraph);
+                        }
+                        
+                        // Add click event to copy content to clipboard
+                        reviewParagraph.addEventListener("click", () => {
+                            navigator.clipboard.writeText(data.review).then(() => {
+                                // Visual feedback that text was copied
+                                const originalBackground = reviewParagraph.style.backgroundColor;
+                                reviewParagraph.style.backgroundColor = "#d4edda";
+                                setTimeout(() => {
+                                    reviewParagraph.style.backgroundColor = originalBackground;
+                                }, 500);
+                            });
+                        });
+                        
+                        // Store in local storage
+                        chrome.storage.local.set({ rrRepliesLeft: data.review }, 
+                            function() {
                                 console.log("Value is set to " + data.review);
                             });
                     } else {
-                        gReviewTextArea.value = data.message;
+                        // Show error message
+                        const errorParagraph = document.createElement("p");
+                        errorParagraph.textContent = data.message;
+                        errorParagraph.style.color = "red";
+                        
+                        const targetContainer = document.querySelector(".RAKQ3e.robzGe");
+                        if (targetContainer) {
+                            targetContainer.appendChild(errorParagraph);
+                        }
                     }
+
                     // Close the popup
                     loadingPopup.style.display = "none";
                     // Perform further actions with the response data
